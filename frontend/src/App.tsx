@@ -15,11 +15,14 @@ export default function App() {
   const startAnalysis = () => {
     setStatus('loading')
     setProgress(0)
-    setProgressMessage('Connecting to Paris Open Data API...')
+    setProgressMessage('Connexion à l\'API Paris Open Data...')
     setResult(null)
     setError(null)
 
-    const eventSource = new EventSource('/api/analyze')
+    // Use env var for backend URL (set at build time on Render)
+    // Falls back to relative /api for local docker-compose usage
+    const backendUrl = import.meta.env.VITE_BACKEND_URL ?? ''
+    const eventSource = new EventSource(`${backendUrl}/api/analyze`)
 
     eventSource.onmessage = (e) => {
       try {
