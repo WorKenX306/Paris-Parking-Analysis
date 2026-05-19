@@ -5,6 +5,11 @@ WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
+
+# Accept backend URL at build time (set in Render environment variables)
+ARG VITE_BACKEND_URL
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+
 RUN npm run build
 
 # Stage 2 — serve with nginx
