@@ -5,6 +5,7 @@ import ConformityByPaymentChart from './charts/ConformityByPaymentChart'
 import ConformityByDistrictChart from './charts/ConformityByDistrictChart'
 import HeatmapChart from './charts/HeatmapChart'
 import MissingValuesCard from './MissingValuesCard'
+import DemarcheSection from './DemarcheSection'
 
 interface Props {
   result: AnalysisResult
@@ -24,6 +25,7 @@ export default function ResultsSection({ result }: Props) {
       </div>
 
       {/* Chiffres clés */}
+      <DemarcheSection />
       <StatCards summary={result.summary} />
 
       {/* Réponse à la question principale */}
