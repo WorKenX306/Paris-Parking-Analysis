@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend
+    container_name: parking_backend
+    restart: unless-stopped
+    expose:
+      - "8000"
+    networks:
+      - app_network
+
+  frontend:
+    build: ./frontend
+    container_name: parking_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
